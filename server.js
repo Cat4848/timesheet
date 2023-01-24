@@ -8,13 +8,16 @@ const expressLayouts = require("express-ejs-layouts");
 const indexRouter = require("./routes/index");
 const driversRouter = require("./routes/drivers");
 const officeRouter = require("./routes/office");
+const methodOverride = require("method-override");
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
-app.set("layout", "layouts/layout");
+app.set("layout", "layouts/startLayout");
 
 app.use(expressLayouts);
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
+app.use(express.urlencoded({ extended: true }));
 
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DATABASE_URL);
