@@ -23,6 +23,7 @@ async function databaseRequest() {
     const workplaceId = workplaceElement.value;
     const request = await fetch(`/addShiftData/${workplaceId}`);
     const response = await request.json();
+    console.log(response);
     const breakDeduction = response.breakDeduction;
     const minShift = response.minShift;
     
@@ -38,6 +39,7 @@ async function databaseRequest() {
 
 function calculateAddShiftFormValues(breakDeduction, minShift, rates) {
     if (startShiftElement.value != "" && finishShiftElement.value != "") {
+        console.log("beginning if statement");
         const startShift = new Date(startShiftElement.value);
         const finishShift = new Date(finishShiftElement.value);
         const breakDeductionInMs = breakDeduction * 60 * 1000;
@@ -53,6 +55,7 @@ function calculateAddShiftFormValues(breakDeduction, minShift, rates) {
 }
 
 function calculateShiftValue(start, finish, rates) {   
+    console.log("beginning calculate shift value");
     const startShift = new Date (start);
     const startDay = startShift.getDay();
     const finishShift = new Date (finish);
@@ -182,6 +185,7 @@ function calculateShiftValue(start, finish, rates) {
 }
 
 function updateAddShiftForm(breakDeduction, minShift, totalShiftLength, hours, minutes, shiftValue) {
+    console.log("update add shift form");
     const breakDeductionElement = document.querySelector("#workplaceBreakDeduction");
     const minShiftElement = document.querySelector("#workplaceMinShift");        
     const totalWorkingHoursElement = document.querySelector("#totalWorkingHours");
