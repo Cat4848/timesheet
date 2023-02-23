@@ -60,18 +60,18 @@ router.post("/shifts", async (req, res) => {
 
 //dashboard routes
 router.get("/updateDashboard", async (req, res) => {
-    console.log("request params", req.query.startDate);
-    console.log("request params", req.query.endDate);
+    console.log("inside express update dashboard");
     let query = Shift.find();
     query.gte("start", new Date(req.query.startDate));
     query.lte("finish", new Date(req.query.endDate));
-    // query = query.gte("start", `ISODate("${req.query.startDate}")`);
-    // query = query.lte("finish", `ISODate("${req.query.finishDate}")`);
     try {
-        const shifts = await query.populate("workplace");
+        console.log("beginning of try statement");
+        const shifts = await query.populate("workplace").exec();
         console.log(shifts);
         res.json({shifts});
+        console.log("finish try statement");
     } catch (error) {
+        console.log("beginning catch statement");
         console.error(error);
     }
 });

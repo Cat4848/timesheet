@@ -40,7 +40,7 @@ function createDateRangePicker() {
 function getDateRangeInfo(startDate, endDate) {
     const updateDashboardData = { startDate: startDate, endDate: endDate };
     const updateDashboardSearchParams = new URLSearchParams(updateDashboardData);
-    const updateDashboardUrl = new URL("https://timesheet-uk.herokuapp.com/drivers/updateDashboard");
+    const updateDashboardUrl = new URL("http://localhost:3000/drivers/updateDashboard");
     //http://localhost:3000/drivers/updateDashboard
     //https://timesheet-uk.herokuapp.com/office/drivers
     updateDashboardUrl.search = updateDashboardSearchParams;
