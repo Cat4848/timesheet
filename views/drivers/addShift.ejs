@@ -1,0 +1,52 @@
+<h2>Add Shift</h2>
+<form action="/drivers/shifts" method="POST">
+    <div>
+        <label>Workplace*</label>
+        <select name="workplace" id="workplace">
+            <option label="Please select"></option>
+            <% workplaces.forEach(workplace => { %>
+                <% if (workplace.id == shift.workplace) { %>
+                    <option selected label="<%= workplace.name %>" value="<%= workplace.id %>"></option>
+                <% } else { %>
+                    <option label="<%= workplace.name %>" value="<%= workplace.id %>"></option>
+                <% } %>
+        <% }) %>
+        </select>
+    </div>
+    <div>
+        <label>Start*</label>
+        <input type="datetime-local" name="start" id="startShift" 
+            <% if (locals.shiftStart != undefined) { %>
+                value="<%= shiftStart %>">
+            <% } %>
+            
+    </div>
+    <div>
+        <label>Finish*</label>
+        <input type="datetime-local" name="finish" id="finishShift" 
+            <% if (locals.shiftFinish != undefined) { %>
+                value="<%= shiftFinish %>">
+            <% } %>
+    </div>
+    <div>
+        <label>Break Deduction*</label>
+        <input type="number" name="breakDeduction" id="workplaceBreakDeduction" readonly>
+    </div>
+    <div>
+        <label>Minimum Shift*</label>
+        <input type="number" name="minShift" id="workplaceMinShift" readonly>
+    </div>
+    <div>
+        <label>Total Working Hours*</label>
+        <input type="text" name="totalWorkingHours" id="totalWorkingHours">
+    </div>
+    <input type="hidden" name="hiddenTotalWorkingHours" id="hiddenTotalWorkingHours">
+    <input type="hidden" name="hiddenTotalWorkingMinutes" id="hiddenTotalWorkingMinutes">
+    <input type="hidden" name="hiddenValue" id="hiddenValue">
+    <div>
+        <label>Notes</label>
+        <textarea name="description"><%= shift.description === "" ? "" : shift.description %></textarea>
+    </div>
+    <a href="/drivers">Cancel</a>
+    <button type="submit">Submit</button>
+</form>

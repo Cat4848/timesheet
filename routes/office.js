@@ -36,7 +36,10 @@ router.post("/drivers", async (req, res) => {
         console.log("New Driver Created Successfully");
         // res.redirect(`office/drivers/${newDriver.id}`);
     } catch {
-        res.render("office/newDriver", {driver: driver});
+        res.render("office/newDriver", {
+            driver: driver,
+            errorMessage: "Error creating New Driver."
+        });
     }
 })
 
@@ -72,14 +75,26 @@ router.post("/workplaces", async (req, res) => {
         address: req.body.address,
         phone: req.body.phone,
         email: req.body.email,
+        breakDeduction: req.body.breakDeduction,
+        minShift: req.body.minShift,
+        weekDayRate: req.body.weekDayRate,
+        weekNightRate: req.body.weekNightRate,
+        saturdayDayRate: req.body.saturdayDayRate,
+        saturdayNightRate: req.body.saturdayNightRate,
+        sundayDayRate: req.body.sundayDayRate,
+        sundayNightRate: req.body.sundayNightRate,
         description: req.body.description
-    })
+    });
     try {
         const newWorkplace = await workplace.save();
+        console.log(newWorkplace);
         res.redirect("/office/workplaces");
         // res.redirect(`office/workplaces/${newWorkplace.id}`);
     } catch {
-        res.render("office/workplaces/newWorkplace", { workplace: workplace });
+        res.render("office/workplaces/newWorkplace", {
+            workplace: workplace,
+            errorMessage: "Error creating Workplace."
+        });
     }
 })
 

@@ -1,5 +1,5 @@
 <div>
-    <label>Name</label>
+    <label>Name*</label>
     <input type="text" name="name" value="<%= driver.name %>">
 </div>
 <div>
@@ -7,7 +7,7 @@
     <input type="text" name="address" value="<%= driver.address %>">
 </div>
 <div>
-    <label>Phone</label>
+    <label>Phone*</label>
     <input type="tel" name="phone" value="<%= driver.mobile %>">
 </div>
 <div>
@@ -15,10 +15,10 @@
     <input type="email" name="email" value="<%= driver.email %>">
 </div>
 <div>
-    <label>Driver License Number</label>
+    <label>Driver License Number*</label>
     <input type="text" name="licenseNo" value="<%= driver.licenseNo %>">
 </div>
 <div>
-    <label>Description</label>
-    <input type="text" name="description" value="<%= driver.description %>">
+    <label>Notes</label>
+    <textarea name="description"><%= driver.description %></textarea>
 </div>
