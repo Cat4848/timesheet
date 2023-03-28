@@ -10,7 +10,7 @@ function createDateRangePicker() {
     const end = moment();
     
     function cb(start, end) {
-        $("#reportrange span").html(start.format("Do MMM YYYY") + " - " + end.format("Do MMM YYYY"));
+        $("#reportrange span").html(start.format("Do MMMM YYYY") + " - " + end.format("Do MMMM YYYY"));
     }
     
     $("#reportrange").daterangepicker({
@@ -40,7 +40,7 @@ function createDateRangePicker() {
 function getDateRangeInfo(startDate, endDate) {
     const updateDashboardData = { startDate: startDate, endDate: endDate };
     const updateDashboardSearchParams = new URLSearchParams(updateDashboardData);
-    const updateDashboardUrl = new URL("https://timesheet-uk.herokuapp.com/drivers/updateDashboard");
+    const updateDashboardUrl = new URL("http://localhost:3000/drivers/updateDashboard");
     //http://localhost:3000/drivers/updateDashboard
     //https://timesheet-uk.herokuapp.com/drivers/updateDashboard
     updateDashboardUrl.search = updateDashboardSearchParams;
@@ -112,7 +112,7 @@ function totalHoursWorkedBarChartCreation(totalTimeFloat) {
         data: data,
         options: options
     };
-    const chartStatus = Chart.getChart("bar-chart");
+    const chartStatus = Chart.getChart("total-hours-bar-chart");
     if (chartStatus != undefined) {
         chartStatus.destroy();
     }
@@ -157,7 +157,7 @@ function totalEarningsBarChartCreation(totalValue) {
         data: data,
         options: options
     };
-    const chartStatus = Chart.getChart("bar-chart");
+    const chartStatus = Chart.getChart("total-earnings-bar-chart");
     if (chartStatus != undefined) {
         chartStatus.destroy();
     }

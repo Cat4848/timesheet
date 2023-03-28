@@ -1,0 +1,6 @@
+<h2>Edit Workplace</h2>
+<form action="/office/workplaces/<%= workplace.id %>?_method=PUT" method="POST">
+    <%- include("./_form_fields") %>
+    <a href="/office/workplaces">Cancel</a>
+    <button type="submit">Update</button>
+</form>

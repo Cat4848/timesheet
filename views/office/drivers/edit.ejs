@@ -1,0 +1,6 @@
+<h2>Edit Driver</h2>
+<form action="/office/drivers/<%= driver.id%>?_method=PUT" method="POST">
+    <%- include("./_form_fields") %>
+    <a href="/office/drivers">Cancel</a>
+    <button type="submit">Update</button>
+</form>

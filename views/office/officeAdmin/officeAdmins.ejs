@@ -1,0 +1,16 @@
+<%= messages.error %>
+<h2>Search Office Admin Accounts</h2>
+<form action="/office/view" method="GET">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" value="<%= searchOptions.name %>">
+    <button type="submit">Search</button>
+</form>
+
+<% if(officeAdmins != null && officeAdmins.length) { %>
+    <% officeAdmins.forEach(officeAdmin => { %>
+        <div><%= officeAdmin.name %></div>
+        <a href="<%= officeAdmin.id %>">View</a>
+        <a href="<%= officeAdmin.id %>/edit">Edit</a>
+        <%- include("../../partials/deleteForm", { url: `/office/${officeAdmin.id}` }) %>
+    <% }) %>
+<% } %> 

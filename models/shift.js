@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
 const shiftSchema = new mongoose.Schema({
+    driver: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "Driver"
+    },
     workplace: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

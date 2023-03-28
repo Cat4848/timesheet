@@ -1,6 +1,9 @@
 <h2>Add Shift</h2>
 <form action="/drivers/shifts" method="POST">
     <div>
+        <input type="hidden" name="driver" value="<%- driver.id %>">
+    </div>
+    <div>
         <label>Workplace*</label>
         <select name="workplace" id="workplace">
             <option label="Please select"></option>

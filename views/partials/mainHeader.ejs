@@ -1,0 +1,14 @@
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Mainstream Timesheet</a></li>
+            <% if (loggedInAs) { %>
+                <li>Logged in as <%- loggedInAs %></li>
+            <% } %>
+            <li><a href="/drivers">Drivers</a></li>
+            <li><a href="/office">Office</a></li>
+            <%- include("./logout") %>
+        </ul>
+    </nav>
+</header>
+

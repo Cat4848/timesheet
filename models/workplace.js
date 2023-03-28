@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Shift = require("./shift");
 const workplaceSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -20,31 +21,71 @@ const workplaceSchema = new mongoose.Schema({
         required: true,
         max: 10
     },
-    weekDayRate: {
+    payInWeekDayRate: {
         type: mongoose.Types.Decimal128,
         required: true
     },
-    weekNightRate: {
+    payInWeekNightRate: {
         type: mongoose.Types.Decimal128,
         required: true
     },
-    saturdayDayRate: {
+    payInSaturdayDayRate: {
         type: mongoose.Types.Decimal128,
         required: true
     },
-    saturdayNightRate: {
+    payInSaturdayNightRate: {
         type: mongoose.Types.Decimal128,
         required: true
     },
-    sundayDayRate: {
+    payInSundayDayRate: {
         type: mongoose.Types.Decimal128,
         required: true
     },
-    sundayNightRate: {
+    payInSundayNightRate: {
+        type: mongoose.Types.Decimal128,
+        required: true
+    },
+    payOutWeekDayRate: {
+        type: mongoose.Types.Decimal128,
+        required: true
+    },
+    payOutWeekNightRate: {
+        type: mongoose.Types.Decimal128,
+        required: true
+    },
+    payOutSaturdayDayRate: {
+        type: mongoose.Types.Decimal128,
+        required: true
+    },
+    payOutSaturdayNightRate: {
+        type: mongoose.Types.Decimal128,
+        required: true
+    },
+    payOutSundayDayRate: {
+        type: mongoose.Types.Decimal128,
+        required: true
+    },
+    payOutSundayNightRate: {
         type: mongoose.Types.Decimal128,
         required: true
     },
     description: String,
+})
+
+workplaceSchema.pre("remove", async function (next){
+    const workplaceId = this.id;
+    let shifts; 
+    try {
+        shifts = await Shift.find({ workplace: workplaceId });
+        console.log("workplace schema shifts", shifts);
+    } catch (error) {
+        next(error);
+    }
+    if (shifts.length > 0) {
+        next(new Error("This workplace has shifts associated still"));
+    } else {
+        next();
+    }
 })
 
 module.exports = mongoose.model("Workplace", workplaceSchema);

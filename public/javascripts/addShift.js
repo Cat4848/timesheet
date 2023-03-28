@@ -38,6 +38,7 @@ async function databaseRequest() {
 }
 
 function calculateAddShiftFormValues(breakDeduction, minShift, rates) {
+    console.log("break deduction", breakDeduction);
     if (startShiftElement.value != "" && finishShiftElement.value != "") {
         console.log("beginning if statement");
         const startShift = new Date(startShiftElement.value);
@@ -49,12 +50,13 @@ function calculateAddShiftFormValues(breakDeduction, minShift, rates) {
         const minutes = Math.floor((totalWorkingTimeInMs % (1000 * 60 * 60) / (1000 * 60)));
         const shiftLength = `${hours} hours ${minutes} minutes`;
         const totalShiftLength = minShift > hours ? minShift : shiftLength;
-        const shiftValue = calculateShiftValue(startShift, finishShift, rates);
+        const shiftValue = calculateShiftValue(startShift, finishShift, rates, breakDeduction);
+        console.log(shiftValue);
         updateAddShiftForm(breakDeduction, minShift, totalShiftLength, hours, minutes, shiftValue);
     }
 }
 
-function calculateShiftValue(start, finish, rates) {   
+function calculateShiftValue(start, finish, rates, breakDeduction) {   
     console.log("beginning calculate shift value");
     const startShift = new Date (start);
     const startDay = startShift.getDay();
@@ -83,10 +85,6 @@ function calculateShiftValue(start, finish, rates) {
     let sundayNightTime = 0;
     
     for (let currentDay = startDay; currentDay <= finishDay; currentDay++) {
-        let currentDayTime = 0;
-        let currentNightTime = 0;
-        let amNightTime = 0;
-        let pmNightTime = 0;
         console.log("loops");
         const currentDateStart = new Date(currentDate);
         currentDateStart.setHours(0,0,0,0);
@@ -101,78 +99,94 @@ function calculateShiftValue(start, finish, rates) {
         const dayRateTime = new Date(currentStart).setHours(6,0,0,0);
         const nightRateTime = new Date(currentStart).setHours(18,0,0,0);
 
-        if ((currentDateStart < currentStart && currentStart < dayRateTime) && (nightRateTime < currentFinish && currentFinish <= currentDateFinish)) {
-            //this is when the shift starts and finishes in the same day
-            //and the start and finish times are during the night rates
-            //for example: when I have 12h on day rate
-            //and at both ends I have some night rate time
-            console.log("night at both ends");
-            amNightTime += dayRateTime - currentStart;
-            pmNightTime += currentFinish - nightRateTime;
-        } else if (currentDateStart < currentStart && currentStart < dayRateTime) {
-            //am start time
-            console.log("am start time");
-            amNightTime += dayRateTime - currentStart;
-        } else if (currentDateStart <= currentFinish && currentFinish < dayRateTime) {
-            //am finish time
-            console.log("am finish time");
-            amNightTime += currentFinish - currentDateStart;
-        } else if (nightRateTime <= currentStart && currentStart<= currentDateFinish) {
-            //pm start time
-            console.log("pm start time");
-            pmNightTime += currentDateFinish - currentStart;
-        } else if (nightRateTime < currentFinish && currentFinish <= currentDateFinish) {
-            //pm finish time
-            console.log("pm finish time");
-            pmNightTime += currentFinish - nightRateTime;
-        } else if (currentStart <= currentDateStart) {
-            //am start time when the shift continues from the previous day 
-            //(this will happen in the second loop)
-            console.log("am start second loop");
-            amNightTime += dayRateTime - currentStart;
-        }
-        currentNightTime = amNightTime + pmNightTime;
-        currentDayTime = totalLength - currentNightTime;
+        const nightAndDayTime = calculateTotalNightTimeAndDayTime(currentDateStart, currentDateFinish, currentStart, currentFinish, dayRateTime, nightRateTime, totalLength);
+        console.log(nightAndDayTime);
+        assignNightAndDayTimeToCorrectDayOfWeek(nightAndDayTime);
 
-        if (weekDays.has(currentDate.getDay())) {
-            console.log("week day");
-            weekNightTime += currentNightTime;
-            weekDayTime += currentDayTime;
-        } else if (currentDate.getDay() === saturday) {
-            console.log("saturday");
-            saturdayNightTime += currentNightTime;
-            saturdayDayTime += currentDayTime;
-        } else if (currentDate.getDay() === sunday) {
-            console.log("sunday");
-            sundayNightTime += currentNightTime;
-            sundayDayTime += currentDayTime;
-        }
-        console.log("am night time", amNightTime / (1000 * 60 * 60));
-        console.log("pm night time", pmNightTime / (1000 * 60 * 60));
-        console.log("total length", totalLength / (1000 * 60 * 60));
-        console.log("night time", currentNightTime / (1000 * 60 * 60));
-        console.log("day time", currentDayTime / (1000 * 60 * 60));
-        console.log("week day time", weekDayTime / (1000 * 60 * 60));
-        console.log("week day rate", rates.weekDayRate);
-        console.log("week night time", weekNightTime / (1000 * 60 * 60));
-        console.log("week night rate", rates.weekNightRate);
-        console.log("saturday day time", saturdayDayTime / (1000 * 60 * 60));
-        console.log("saturday day rate", rates.saturdayDayRate);
-        console.log("saturday night time", saturdayNightTime / (1000 * 60 * 60));
-        console.log("saturday night rate", rates.saturdayNightRate);
-        console.log("sunday day time", sundayDayTime / (1000 * 60 * 60));
-        console.log("sunday day rate", rates.sundayDayRate);
-        console.log("sunday night time", sundayNightTime / (1000 * 60 * 60));
-        console.log("sunday night rate", rates.sundayNightRate);        
+        function assignNightAndDayTimeToCorrectDayOfWeek () {
+            //this function, (assignNightAndDayTimeToCorrectDayOfWeek) is in the namespace of the calculateShiftValue function 
+            //I placed the function declaration inside the calculateShiftValue function because
+            //I need access to the following global variables: weekDays, currentDate, weekNightTime, 
+            //weekDayTime, saturdayNightTime, saturdayDayTime, sundayNightTime, sundayDayTime
+            //and also the days if the week
+            //called in the loop
+            if (weekDays.has(currentDate.getDay())) {
+                console.log("week day");
+                weekNightTime += nightAndDayTime.currentNightTime;
+                weekDayTime += nightAndDayTime.currentDayTime;
+            } else if (currentDate.getDay() === saturday) {
+                console.log("saturday");
+                saturdayNightTime += nightAndDayTime.currentNightTime;
+                saturdayDayTime += nightAndDayTime.currentDayTime;
+            } else if (currentDate.getDay() === sunday) {
+                console.log("sunday");
+                sundayNightTime += nightAndDayTime.currentNightTime;
+                sundayDayTime += nightAndDayTime.currentDayTime;
+            } 
+        } 
         currentDate.setDate(currentDate.getDate() + 1);
     }
+    
+    return totalShiftPay (weekDayTime, weekNightTime, saturdayDayTime, saturdayNightTime, sundayDayTime, sundayNightTime, rates, breakDeduction);
+}
+
+function calculateTotalNightTimeAndDayTime(currentDateStart, currentDateFinish, currentStart, currentFinish, dayRateTime, nightRateTime, totalLength) {
+    //called in the loop
+    let currentDayTime = 0;
+    let currentNightTime = 0;
+    let amNightTime = 0;
+    let pmNightTime = 0;
+    if ((currentDateStart < currentStart && currentStart < dayRateTime) && (nightRateTime < currentFinish && currentFinish <= currentDateFinish)) {
+        //this is when the shift starts and finishes in the same day
+        //and the start and finish times are during the night rates
+        //for example: when I have 12h on day rate
+        //and at both ends I have some night rate time
+        console.log("night at both ends");
+        amNightTime += dayRateTime - currentStart;
+        pmNightTime += currentFinish - nightRateTime;
+    } else if (currentDateStart < currentStart && currentStart < dayRateTime) {
+        //am start time
+        console.log("am start time");
+        amNightTime += dayRateTime - currentStart;
+    } else if (currentDateStart <= currentFinish && currentFinish < dayRateTime) {
+        //am finish time
+        console.log("am finish time");
+        amNightTime += currentFinish - currentDateStart;
+    } else if (nightRateTime <= currentStart && currentStart<= currentDateFinish) {
+        //pm start time
+        console.log("pm start time");
+        pmNightTime += currentDateFinish - currentStart;
+    } else if (nightRateTime < currentFinish && currentFinish <= currentDateFinish) {
+        //pm finish time
+        console.log("pm finish time");
+        pmNightTime += currentFinish - nightRateTime;
+    } else if (currentStart <= currentDateStart) {
+        //am start time when the shift continues from the previous day 
+        //(this will happen in the second loop)
+        console.log("am start second loop");
+        amNightTime += dayRateTime - currentStart;
+    }
+    currentNightTime = amNightTime + pmNightTime;
+    currentDayTime = totalLength - currentNightTime;
+    return { currentNightTime: currentNightTime, currentDayTime: currentDayTime };
+}
+
+function totalShiftPay (weekDayTime, weekNightTime, saturdayDayTime, saturdayNightTime, sundayDayTime, sundayNightTime, rates, breakDeduction) {
+    //called after the loop
+    console.log("week day time", weekDayTime / (1000 * 60 * 60));
+    console.log("week day time", weekDayTime );
+    console.log("week night time", weekNightTime / (1000 * 60 * 60));
+    console.log("week night time", weekNightTime );
+
+    const timeLessBreak = calculateBreakDeduction(weekDayTime, weekNightTime, saturdayDayTime, saturdayNightTime, sundayDayTime, sundayNightTime, breakDeduction);
+
     const toHours = 1000 * 60 * 60;
-    const weekDayPay = parseFloat(((weekDayTime / toHours) * rates.weekDayRate).toFixed(2));
-    const weekNightPay = parseFloat(((weekNightTime / toHours) * rates.weekNightRate).toFixed(2));
-    const saturdayDayPay = parseFloat(((saturdayDayTime / toHours) * rates.saturdayDayRate).toFixed(2));
-    const saturdayNightPay = parseFloat(((saturdayNightTime / toHours) * rates.saturdayNightRate).toFixed(2));
-    const sundayDayPay = parseFloat(((sundayDayTime / toHours) * rates.sundayDayRate).toFixed(2));
-    const sundayNightPay = parseFloat(((sundayNightTime / toHours) * rates.sundayNightRate).toFixed(2));
+    const weekDayPay = parseFloat(((timeLessBreak.weekDayTime / toHours) * rates.weekDayRate).toFixed(2));
+    const weekNightPay = parseFloat(((timeLessBreak.weekNightTime / toHours) * rates.weekNightRate).toFixed(2));
+    const saturdayDayPay = parseFloat(((timeLessBreak.saturdayDayTime / toHours) * rates.saturdayDayRate).toFixed(2));
+    const saturdayNightPay = parseFloat(((timeLessBreak.saturdayNightTime / toHours) * rates.saturdayNightRate).toFixed(2));
+    const sundayDayPay = parseFloat(((timeLessBreak.sundayDayTime / toHours) * rates.sundayDayRate).toFixed(2));
+    const sundayNightPay = parseFloat(((timeLessBreak.sundayNightTime / toHours) * rates.sundayNightRate).toFixed(2));
     const totalShiftPay = weekDayPay + weekNightPay + saturdayDayPay + saturdayNightPay + sundayDayPay + sundayNightPay;
     console.log("week day pay", weekDayPay);
     console.log("week night pay", weekNightPay);
@@ -182,6 +196,45 @@ function calculateShiftValue(start, finish, rates) {
     console.log("sunday night pay", sundayNightPay);
     console.log("total pay", totalShiftPay);
     return totalShiftPay;
+}
+
+function calculateBreakDeduction (weekDayTime, weekNightTime, saturdayDayTime, saturdayNightTime, sundayDayTime, sundayNightTime, breakDeduction) {
+    //deduct the break from all time sections 
+    //1: by computing their proportion in the sum of all time sections.
+    // 2: subtracting the break time and computing a new total time which is initial total time less the break
+    //3: multiply the proportion of each time section by the new sum
+    const allTime = [weekDayTime, weekNightTime, saturdayDayTime, saturdayNightTime, sundayDayTime, sundayNightTime];
+    const sumAllTime = allTime.reduce((a, b) => a + b);
+    const weekDayTimeProportion = weekDayTime / sumAllTime;
+    const weekNightTimeProportion = weekNightTime / sumAllTime;
+    const saturdayDayTimeProportion = saturdayDayTime / sumAllTime;
+    const saturdayNightTimeProportion = saturdayNightTime / sumAllTime;
+    const sundayDayTimeProportion = sundayDayTime / sumAllTime;
+    const sundayNightTimeProportion = sundayNightTime / sumAllTime;
+
+    const minutesToMilliseconds = 60 * 1000;
+    const breakDeductionInMilliseconds = breakDeduction * minutesToMilliseconds;
+    const sumAllTimeLessBreakDeduction = sumAllTime - breakDeductionInMilliseconds;
+
+    weekDayTime = weekDayTimeProportion * sumAllTimeLessBreakDeduction;
+    weekNightTime = weekNightTimeProportion * sumAllTimeLessBreakDeduction;
+    saturdayDayTime = saturdayDayTimeProportion * sumAllTimeLessBreakDeduction;
+    saturdayNightTime = saturdayNightTimeProportion * sumAllTimeLessBreakDeduction;
+    sundayDayTime = sundayDayTimeProportion * sumAllTimeLessBreakDeduction;
+    sundayNightTime = sundayNightTimeProportion * sumAllTimeLessBreakDeduction;
+
+    console.log("week day time", weekDayTime / (1000 * 60 * 60));
+    console.log("week day time", weekDayTime );
+    console.log("week night time", weekNightTime / (1000 * 60 * 60));
+    console.log("week night time", weekNightTime );
+    return {
+        weekDayTime: weekDayTime,
+        weekNightTime: weekNightTime,
+        saturdayDayTime: saturdayDayTime,
+        saturdayNightTime: saturdayNightTime,
+        sundayDayTime: sundayDayTime,
+        sundayNightTime: sundayNightTime
+    };
 }
 
 function updateAddShiftForm(breakDeduction, minShift, totalShiftLength, hours, minutes, shiftValue) {
