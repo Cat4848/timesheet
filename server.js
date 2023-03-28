@@ -15,19 +15,27 @@ const passport = require("passport");
 const session = require("express-session");
 const cors = require("cors");
 const MongoStore = require("connect-mongo");
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    store: MongoStore.create({
-        mongoUrl: process.env.DATABASE_URL
-    }),
-    resave: false,
-    saveUninitialized: false,
-    cookie: {}
-}));
 
 if (app.get("env") === "production") {
     app.set("trust proxy", 1);
-    session.cookie.secure = true;
+    app.use(session({
+        secret: process.env.SESSION_SECRET,
+        store: MongoStore.create({
+            mongoUrl: process.env.DATABASE_URL
+        }),
+        resave: false,
+        saveUninitialized: false,
+        cookie: {secure: true}
+    }));
+} else {
+    app.use(session({
+        secret: process.env.SESSION_SECRET,
+        store: MongoStore.create({
+            mongoUrl: process.env.DATABASE_URL
+        }),
+        resave: false,
+        saveUninitialized: false
+    }));
 }
 app.use(passport.initialize());
 app.use(passport.session());
