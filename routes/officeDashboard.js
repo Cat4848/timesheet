@@ -11,9 +11,9 @@ const {toHoursAndMinutes} = require("../public/modules/backend/utils");
 const shift = require("../models/shift");
 router.set("layout", "layouts/office");
 
-// router.use(isAuthenticated);
-// router.use(isAuthorized);
-// router.use(isOfficeAdmin);
+router.use(isAuthenticated);
+router.use(isAuthorized);
+router.use(isOfficeAdmin);
 
 router.get("/totals", async (req, res) => {
     console.log("dashboard totals route");

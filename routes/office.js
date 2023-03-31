@@ -12,9 +12,9 @@ const {isOfficeAdmin} = require("../public/modules/backend/utils");
 router.set("layout", "layouts/office");
 
 router.use("/dashboard", officeDashboardRouter);
-// router.use(isAuthenticated);
-// router.use(isAuthorized);
-// router.use(isOfficeAdmin);
+router.use(isAuthenticated);
+router.use(isAuthorized);
+router.use(isOfficeAdmin);
 
 router.get("/drivers/new", (req, res) => {
     //render add newDriver page
