@@ -34,7 +34,11 @@ const shiftSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    value: {
+    driverValue: {
+        type: mongoose.Types.Decimal128,
+        required: true
+    },
+    officeValue: {
         type: mongoose.Types.Decimal128,
         required: true
     },

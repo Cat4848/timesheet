@@ -5,9 +5,9 @@ const Workplace = require("../models/workplace");
 const Shift = require("../models/shift");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const {isAuthenticated} = require("../utils/utils");
-const {isAuthorized} = require("../utils/utils");
-const {isDriver} = require("../utils/utils");
+const {isAuthenticated} = require("../public/modules/backend/utils");
+const {isAuthorized} = require("../public/modules/backend/utils");
+const {isDriver} = require("../public/modules/backend/utils");
 router.set("layout", "layouts/drivers");
 
 router.use(isAuthenticated);
@@ -26,6 +26,7 @@ router.get("/addShift", async (req, res) => {
     console.log("drivers add shift -> req.user", req.user);
     try {
         const driver = req.user;
+        console.log("drivers add shift -> driver.id", driver.id);
         const workplaces = await Workplace.find({});
         res.render("drivers/addShift", {
             driver: driver,
@@ -40,10 +41,11 @@ router.get("/addShift", async (req, res) => {
 
 router.post("/shifts", async (req, res) => {
     //add a new shift
-    console.log("hidden minutes", req.body.hiddenTotalWorkingMinutes);
+    console.log("post new shift -> driver id", req.body.driver);
+    console.log("post new shift -> driver value", req.body.driverHiddenValue);
+    console.log("post new shift -> office value", req.body.officeHiddenValue);
     let newShift;
     const workplaces = await Workplace.find({});
-    const drivers = await Driver.find({});
     const shift = new Shift({
         driver: req.body.driver,
         workplace: req.body.workplace,
@@ -53,44 +55,44 @@ router.post("/shifts", async (req, res) => {
         minShift: req.body.minShift,
         totalWorkingHours: req.body.hiddenTotalWorkingHours,
         totalWorkingMinutes: req.body.hiddenTotalWorkingMinutes,
-        value: req.body.hiddenValue,
+        driverValue: req.body.driverHiddenValue,
+        officeValue: req.body.officeHiddenValue,
         description: req.body.description
     });
     try {
         newShift = await shift.save();
-        console.log(newShift);
+        console.log("post new shift", newShift);
         res.redirect("/drivers");
-    } catch {
+    } catch (error){
+        console.log("post new shift -> error", error);
         const shiftStart = shift.start?.toISOString().slice(0, -5);
         const shiftFinish = shift.finish?.toISOString().slice(0, -5);
         res.render("drivers/addShift", {
             errorMessage: "Error Submitting Shift.",
-            drivers: drivers,
+            driver: req.user.id,
             workplaces: workplaces,
             shift: shift,
             shiftStart,
-            shiftFinish
+            shiftFinish,
+            loggedInAs: req.user.loggedInAs
         })
     }
 });
 
-//dashboard routes
-router.get("/updateDashboard", async (req, res) => {
-    //change to "/dashboard"
-    console.log("inside express update dashboard");
-    console.log("request params id", req.params.id)
+router.get("/dashboard", async (req, res) => {
+    //frontend fetch request
+    console.log("drivers dashboard route");
+    const driverId = req.user.id;
     let query = Shift.find();
     query.gte("start", new Date(req.query.startDate));
     query.lte("finish", new Date(req.query.endDate));
     try {
-        console.log("beginning of try statement");
-        const shifts = await query.populate("workplace").exec();
-        // console.log(shifts);
-        res.json({shifts});
-        console.log("finish try statement");
+        const rawShifts = await query.populate("workplace").populate("driver");
+        const shifts = rawShifts.filter(shift => shift.driver.id == driverId);
+        res.json({shifts: shifts});
     } catch (error) {
-        console.log("beginning catch statement");
-        console.error(error);
+        console.error("Error: Driver Dashboard Route", error);
+        res.redirect("/drivers");
     }
 });
 

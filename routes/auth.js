@@ -4,8 +4,8 @@ const passport = require("passport");
 const Driver = require("../models/driver");
 const OfficeAdmin = require("../models/officeAdmin");
 const RefreshToken = require("../models/refreshToken");
-const {generateAccessToken} = require("../utils/utils");
-const {isAuthenticated} = require("../utils/utils");
+const {generateAccessToken} = require("../public/modules/backend/utils");
+const {isAuthenticated} = require("../public/modules/backend/utils");
 const jwt = require("jsonwebtoken");
 router.set("layout", "layouts/authentication");
 

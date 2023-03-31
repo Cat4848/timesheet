@@ -1,2 +1,128 @@
 <h2>Dashboard</h2>
+<div id="totals-container" style="border: 2px solid green;">
+    flex to the right
+    <div>
+        <h4>Total Drivers</h4>
+        <span id="total-drivers"></span>
+    </div>
+    <div>
+        <h4>Total Workplaces</h4>
+        <span id="total-workplaces"></span>
+    </div>
+</div>
+<div id="financial-container" style="border: 2px solid red">
+    <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+        <i class="fa fa-calendar"></i>&nbsp;
+        <span></span> <i class="fa fa-caret-down"></i>
+    </div>
+    <div>
+        <h4>Profit</h4>
+        <span id="profit"></span>
+    </div>
+    <div>
+        <h4>Money In</h4>
+        <span id="money-in"></span>
+    </div>
+    <div>
+        <h4>Money Out</h4>
+        <span id="money-out"></span>
+    </div>
+    <div>
+        <h4>Hours Drivers Worked</h4>
+        <span id="total-drivers-hours"></span>
+    </div>
+</div>
+<div style="display: flex;">
+    <div id="drivers-container" style="border: 2px solid red">
+        <div>
+            <h4>Top 3 Earning Drivers</h4>
+            <div>
+                <span id="no-data-drivers"></span>
+            </div>
+            <div>
+                <span id="driver-1"></span>
+            </div>
+            <div>
+                <span id="driver-2"></span>
+            </div>
+            <div>
+                <span id="driver-3"></span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="workplaces-container" style="border: 2px solid red">
+        <div>
+            <h4>Top 3 Earning Workplaces</h4>
+            <div>
+                <span id="no-data-workplaces"></span>
+            </div>
+            <div>
+                <span id="workplace-1"></span>
+            </div>
+            <div>
+                <span id="workplace-2"></span>
+            </div>
+            <div>
+                <span id="workplace-3"></span>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<div id="compare-container" style="border: 2px solid red; display:flex">
+    <div style="display: flex;">
+        <h3>Compare</h3>
+        <div>
+            <h4>Range 1</h4>
+            <div id="reportrange1" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                <i class="fa fa-calendar"></i>&nbsp;
+                <span></span> <i class="fa fa-caret-down"></i>
+            </div>
+            <div>
+                <h4>Profit</h4>
+                <span id="compare1-profit"></span>
+            </div>
+            <div>
+                <h4>Money In</h4>
+                <span id="compare1-money-in"></span>
+            </div>
+            <div>
+                <h4>Money Out</h4>
+                <span id="compare1-money-out"></span>
+            </div>
+            <div>
+                <h4>Hours Drivers Worked</h4>
+                <span id="compare1-total-drivers-hours"></span>
+            </div>
+        </div>
+        <div>
+            <h4>Range 2</h4>
+            <div id="reportrange2" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                <i class="fa fa-calendar"></i>&nbsp;
+                <span></span> <i class="fa fa-caret-down"></i>
+            </div>
+            <div>
+                <h4>Profit</h4>
+                <span id="compare2-profit"></span>
+            </div>
+            <div>
+                <h4>Money In</h4>
+                <span id="compare2-money-in"></span>
+            </div>
+            <div>
+                <h4>Money Out</h4>
+                <span id="compare2-money-out"></span>
+            </div>
+            <div>
+                <h4>Hours Drivers Worked</h4>
+                <span id="compare2-total-drivers-hours"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="border: 2px solid red">
+    <canvas id="pie-chart" style="width: 600px; height: 200px; border: 2px solid green"></canvas>
+</div>
 

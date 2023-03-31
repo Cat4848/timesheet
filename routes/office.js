@@ -4,14 +4,14 @@ const Driver = require("../models/driver");
 const Workplace = require("../models/workplace");
 const Shift = require("../models/shift");
 const OfficeAdmin = require("../models/officeAdmin");
-const RefreshToken = require("../models/refreshToken");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const {isAuthenticated} = require("../utils/utils");
-const {isAuthorized} = require("../utils/utils");
-const {isOfficeAdmin} = require("../utils/utils");
+const officeDashboardRouter = require("./officeDashboard");
+const {isAuthenticated} = require("../public/modules/backend/utils");
+const {isAuthorized} = require("../public/modules/backend/utils");
+const {isOfficeAdmin} = require("../public/modules/backend/utils");
 router.set("layout", "layouts/office");
 
+router.use("/dashboard", officeDashboardRouter);
 router.use(isAuthenticated);
 router.use(isAuthorized);
 router.use(isOfficeAdmin);
@@ -108,13 +108,14 @@ router.get("/driverData/:id", async (req, res) => {
     //front-end fetch request
     //this is used when accessing the view button of a particular driver
     console.log(`access driver data ${req.params.id}`);
+    console.log("access driver data", req.query)
     let driver = [];
     let shifts = [];
     const driverId = req.params.id;
     let shiftQuery = Shift.find();
     
-    shiftQuery.gte("start", new Date(req.query.startDate));
-    shiftQuery.lte("finish", new Date(req.query.endDate));
+    shiftQuery.gte("start", new Date(req.query.start));
+    shiftQuery.lte("finish", new Date(req.query.end));
     shiftQuery.where("driver").equals(driverId);
     try {
         driver = await Driver.findById(driverId);
@@ -125,7 +126,7 @@ router.get("/driverData/:id", async (req, res) => {
             const totalMinutes = shifts.reduce((a, b) => a + b.totalWorkingMinutes, 0);
             const totalTime = totalHours + (totalMinutes / 60);
                     
-            const totalValue = shifts.reduce((a, b) => parseFloat(a) + parseFloat(b.value), 0);
+            const totalValue = shifts.reduce((a, b) => parseFloat(a) + parseFloat(b.driverValue), 0);
             console.log("total hours", totalTime);
             console.log("total value", totalValue);
             res.json({
@@ -517,11 +518,6 @@ router.delete("/:id", async (req, res) => {
     } catch {
         res.redirect("/office/view");
     }
-})
-
-router.get("/dashboard", (req, res) => {
-    //not active yet
-    res.send("Dashboard Page");
 })
 
 router.get("/:id", async (req, res) => {

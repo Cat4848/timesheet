@@ -1,9 +1,6 @@
 <h2>Add Shift</h2>
 <form action="/drivers/shifts" method="POST">
     <div>
-        <input type="hidden" name="driver" value="<%- driver.id %>">
-    </div>
-    <div>
         <label>Workplace*</label>
         <select name="workplace" id="workplace">
             <option label="Please select"></option>
@@ -41,11 +38,13 @@
     </div>
     <div>
         <label>Total Working Hours*</label>
-        <input type="text" name="totalWorkingHours" id="totalWorkingHours">
+        <input type="text" name="totalWorkingHours" id="totalWorkingHours" readonly>
     </div>
+    <input type="hidden" name="driver" value="<%= driver.id %>">
     <input type="hidden" name="hiddenTotalWorkingHours" id="hiddenTotalWorkingHours">
     <input type="hidden" name="hiddenTotalWorkingMinutes" id="hiddenTotalWorkingMinutes">
-    <input type="hidden" name="hiddenValue" id="hiddenValue">
+    <input type="hidden" name="driverHiddenValue" id="driverHiddenValue">
+    <input type="hidden" name="officeHiddenValue" id="officeHiddenValue">
     <div>
         <label>Notes</label>
         <textarea name="description"><%= shift.description === "" ? "" : shift.description %></textarea>

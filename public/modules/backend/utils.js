@@ -83,11 +83,27 @@ function isDriver(req, res, next) {
     }
 }
 
+function toFloat(hours, minutes) {
+    const floatMinutes = parseFloat((minutes / 60).toFixed(2));
+    const totalTimeFloat = hours + floatMinutes;
+    return totalTimeFloat;
+}
+
+function toHoursAndMinutes(timeFloat) {
+    const totalMinutes = timeFloat * 60;
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = Math.floor(totalMinutes % 60);
+    return `${hours}h ${minutes}m`;
+}
+
+
 module.exports = {
     generateAccessToken, 
     cookiesParser, 
     isAuthenticated, 
     isAuthorized,
     isOfficeAdmin,
-    isDriver
+    isDriver,
+    toFloat,
+    toHoursAndMinutes
 };
