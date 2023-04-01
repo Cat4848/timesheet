@@ -17,15 +17,11 @@
     <title>Mainstream Timesheet</title>
 </head>
 <body>
-    <header>
-        <%- include("../partials/mainHeader") %>
+    <div class="header-container">
         <%- include("../partials/officeHeader") %>
+        <%- include("../partials/mainHeader") %>
         <%- include("../partials/errorMessage") %>
-    </header>
-
+    </div>
     <%- body %>
-    <footer>
-        <%- include("../partials/footer") %>
-    </footer>
 </body>
 </html>

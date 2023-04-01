@@ -1,0 +1,54 @@
+.dashboard-title-container {
+    margin-left: 1rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:flex-end;
+    align-items: center;
+    margin: 1rem;
+    margin-bottom: 4rem;
+}
+
+.totals-container {
+    border-bottom: 1px solid var( --color-nav-bar-border-bottom);
+}
+
+.totals-container div {
+    margin-left: 1rem;
+    text-align: center;
+}
+
+.totals-container div h4 {
+    margin: 0.5rem;
+}
+
+.financial-container {
+    border-bottom: 1px solid var( --color-nav-bar-border-bottom);
+    justify-content: space-between;
+}
+
+.top3-container {
+    border-bottom: 1px solid var(--color-nav-bar-border-bottom);
+    justify-content: space-around;
+}
+
+.wrapper {
+    border: 1px solid var(--color-nav-bar-border-bottom);
+    margin: 1rem;
+    box-shadow: 10px 10px black;  
+    margin-bottom: 4rem; 
+}
+
+.compare-container {
+    display: flex;
+    text-align:justify;
+    justify-content: space-evenly;
+    padding-bottom: 2rem;
+}
+
+
+
+

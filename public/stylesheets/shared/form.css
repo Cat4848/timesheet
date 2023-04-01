@@ -1,0 +1,25 @@
+:root {
+    --form-margin-left: 1rem;
+}
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--form-margin-left);
+    margin-bottom: 50px;
+    width: 50%;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.form-item input {
+   outline-color: var(--color-nav-bar-border-bottom);
+   outline-color: black;
+   border: 1px solid var(--color-nav-bar-border-bottom);
+   padding: 10px;
+   border-radius: 5px;
+   margin: 5px 0;
+}

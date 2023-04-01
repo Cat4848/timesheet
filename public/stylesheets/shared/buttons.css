@@ -1,0 +1,76 @@
+:root {
+    --color-btn-primary-background: var(--text-color);
+    --color-btn-primary-background-light: var(--background-color);
+    --color-btn-primary-text: var(--background-color);
+    --color-btn-primary-text-light: var(--text-color);
+    --color-btn-border: var(--text-color);
+    --color-btn-cancel-background: hsl(0, 0%, 95%);
+    --color-btn-cancel-background-dark: hsl(0, 0%, 90%);
+    --color-btn-cancel-text: var(--text-color);
+    --color-btn-delete-background: hsl(0, 100%, 50%);
+    --color-btn-delete-background-dark: hsl(0, 100%, 45%);
+    --color-btn-delete-background-text: var(--background-color);
+}
+
+.btn {
+    border: 1px solid var(--color-btn-border);
+    border-radius: 0.3rem;
+    padding: 0.5rem 3rem;
+    font-family: "Varela Round";
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--color-btn-primary-background);
+    color: var(--color-btn-primary-text);
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-btn-primary-background-light);
+    color: var(--color-btn-primary-text-light);
+}
+
+.btn-cancel {
+    background-color: var(--color-btn-cancel-background);
+    color: var(--color-btn-cancel-text);
+    transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+    background-color: var(--color-btn-cancel-background-dark);
+}
+
+.btn-delete {
+    background-color: var(--color-btn-delete-background);
+    color: var(--color-btn-delete-background-text);
+    transition: background-color 0.2s;
+}
+
+.btn-delete:hover {
+    background-color: var(--color-btn-delete-background-dark);
+}
+
+.btn-logout {
+    background-color: var(--color-btn-primary-background);
+    color: var(--color-btn-primary-text);
+    border: 1px solid var(--color-btn-border);
+    border-radius: 0.3rem;
+    padding: 0.2rem 1rem;
+    font-family: "Varela Round";
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: var(--color-btn-primary-background-light);
+    color: var(--color-btn-primary-text-light);
+}
+

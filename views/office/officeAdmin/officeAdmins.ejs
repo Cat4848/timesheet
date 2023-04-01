@@ -1,16 +1,31 @@
-<%= messages.error %>
-<h2>Search Office Admin Accounts</h2>
-<form action="/office/view" method="GET">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" value="<%= searchOptions.name %>">
-    <button type="submit">Search</button>
-</form>
-
-<% if(officeAdmins != null && officeAdmins.length) { %>
-    <% officeAdmins.forEach(officeAdmin => { %>
-        <div><%= officeAdmin.name %></div>
-        <a href="<%= officeAdmin.id %>">View</a>
-        <a href="<%= officeAdmin.id %>/edit">Edit</a>
-        <%- include("../../partials/deleteForm", { url: `/office/${officeAdmin.id}` }) %>
-    <% }) %>
-<% } %> 
+<div class="show-wrapper">
+    <%= messages.error %>
+    <div class="page-header-container">
+        <h2>Search Office Admin Accounts</h2>
+    </div>
+    <form action="/office/view" method="GET">
+        <div class="form-row">
+            <div class="form-item">
+                
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="<%= searchOptions.name %>">
+            </div>   
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+    
+    <% if(officeAdmins != null && officeAdmins.length) { %>
+        <% officeAdmins.forEach(officeAdmin => { %>
+            <div class="show-row">
+                
+                <div class="show-item-name"><%= officeAdmin.name %></div>
+                <div class="show-item-buttons">
+                    
+                    <a class="btn btn-primary" href="<%= officeAdmin.id %>">View</a>
+                    <a class="btn btn-primary" href="<%= officeAdmin.id %>/edit">Edit</a>
+                    <%- include("../../partials/deleteForm", { url: `/office/${officeAdmin.id}` }) %>
+                </div>
+            </div>
+            <% }) %>
+            <% } %> 
+</div>

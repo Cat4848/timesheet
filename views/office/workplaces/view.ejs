@@ -1,42 +1,80 @@
-<h2><%= workplace.name %></h2>
-<div>Address</div>
-<div><%= workplace.address %></div>
-<div>Telephone</div>
-<div><%= workplace.phone %></div>
-<div>E-mail</div>
-<div><%= workplace.email %></div>
-<div>Break Deduction (minutes)</div>
-<div><%= workplace.breakDeduction %></div>
-<div>Minimum Shift (hours)</div>
-<div><%= workplace.minShift %></div>
+<div class="show-wrapper">
+    <div class="page-header-container">
+        <h2><%= workplace.name %></h2>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Address</div>
+        <div><%= workplace.address %></div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Telephone</div>
+        <div><%= workplace.phone %></div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">E-mail</div>
+        <div><%= workplace.email %></div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Break Deduction (minutes)</div>
+        <div><%= workplace.breakDeduction %></div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Minimum Shift (hours)</div>
+        <div><%= workplace.minShift %></div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Pay In Week Day Rate</div>
+        <div>£<%= workplace.payInWeekDayRate %>/hour</div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Pay In Week Night Rate</div>
+        <div>£<%= workplace.payInWeekNightRate %>/hour</div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Pay In Saturday Day Rate</div>
+        <div>£<%= workplace.payInSaturdayDayRate %>/hour</div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Pay In Saturday Night Rate</div>
+        <div>£<%= workplace.payInSaturdayNightRate %>/hour</div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Pay In Sunday Day Rate</div>
+        <div>£<%= workplace.payInSundayDayRate %>/hour</div>
+    </div>
+    <div class="view-row">
 
-<div>Pay In Week Day Rate</div>
-<div>£<%= workplace.payInWeekDayRate %>/hour</div>
-<div>Pay In Week Night Rate</div>
-<div>£<%= workplace.payInWeekNightRate %>/hour</div>
-<div>Pay In Saturday Day Rate</div>
-<div>£<%= workplace.payInSaturdayDayRate %>/hour</div>
-<div>Pay In Saturday Night Rate</div>
-<div>£<%= workplace.payInSaturdayNightRate %>/hour</div>
-<div>Pay In Sunday Day Rate</div>
-<div>£<%= workplace.payInSundayDayRate %>/hour</div>
-<div>Pay In Sunday Night Rate</div>
-<div>£<%= workplace.payInSundayNightRate %>/hour</div>
-
-<div>Pay Out Week Day Rate</div>
-<div>£<%= workplace.payOutWeekDayRate %>/hour</div>
-<div>Pay Out Week Night Rate</div>
-<div>£<%= workplace.payOutWeekNightRate %>/hour</div>
-<div>Pay Out Saturday Day Rate</div>
-<div>£<%= workplace.payOutSaturdayDayRate %>/hour</div>
-<div>Pay Out Saturday Night Rate</div>
-<div>£<%= workplace.payOutSaturdayNightRate %>/hour</div>
-<div>Pay Out Sunday Day Rate</div>
-<div>£<%= workplace.payOutSundayDayRate %>/hour</div>
-<div>Pay Out Sunday Night Rate</div>
-<div>£<%= workplace.payOutSundayNightRate %>/hour</div>
-
-<div>Description</div>
-<div><%= workplace.description %></div>
+        <div class="view-title">Pay In Sunday Night Rate</div>
+        <div>£<%= workplace.payInSundayNightRate %>/hour</div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Pay Out Week Day Rate</div>
+        <div>£<%= workplace.payOutWeekDayRate %>/hour</div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Pay Out Week Night Rate</div>
+        <div>£<%= workplace.payOutWeekNightRate %>/hour</div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Pay Out Saturday Day Rate</div>
+        <div>£<%= workplace.payOutSaturdayDayRate %>/hour</div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Pay Out Saturday Night Rate</div>
+        <div>£<%= workplace.payOutSaturdayNightRate %>/hour</div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Pay Out Sunday Day Rate</div>
+        <div>£<%= workplace.payOutSundayDayRate %>/hour</div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Pay Out Sunday Night Rate</div>
+        <div>£<%= workplace.payOutSundayNightRate %>/hour</div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Description</div>
+        <div><%= workplace.description %></div>
+    </div>
+</div>
 
 

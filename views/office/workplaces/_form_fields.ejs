@@ -1,78 +1,79 @@
-<div>
-    <label>Name*</label>
-    <input type="text" name="name" value="<%= workplace.name %>">
+<div class="form-row">
+    <div class="form-item">
+        <label>Name*</label>
+        <input type="text" name="name" value="<%= workplace.name %>">
+    </div>
+    <div class="form-item">
+        <label>Address</label>
+        <input type="text" name="address" value="<%= workplace.address %>">
+    </div>
+    <div class="form-item">
+        <label>Phone</label>
+        <input type="tel" name="phone" value="<%= workplace.phone %>">
+    </div>
+    <div class="form-item">
+        <label>E-mail</label>
+        <input type="email" name="email" value="<%= workplace.email %>">
+    </div>
+    <div class="form-item">
+        <label>Break Deduction (in minutes)*</label>
+        <input type="number" max="60" name="breakDeduction" value="<%= workplace.breakDeduction %>">
+    </div>
+    <div class="form-item">
+        <label>Minimum Shift Pay (in hours)*</label>
+        <input type="number" name="minShift" max="10" value="<%= workplace.minShift %>">
+    </div>
+    <div class="form-item">
+        <label>Pay In Week Day Rate £*</label>
+        <input type="text" name="payInWeekDayRate" value="<%= workplace.payInWeekDayRate %>">
+    </div>
+    <div class="form-item">
+        <label>Pay In Week Night Rate £*</label>
+        <input type="text" name="payInWeekNightRate" value="<%= workplace.payInWeekNightRate %>">
+    </div>
+    <div class="form-item">
+        <label>Pay In Saturday Day Rate £*</label>
+        <input type="text" name="payInSaturdayDayRate" value="<%= workplace.payInSaturdayDayRate %>">
+    </div>
+    <div class="form-item">
+        <label>Pay In Saturday Night Rate £*</label>
+        <input type="text" name="payInSaturdayNightRate" value="<%= workplace.payInSaturdayNightRate %>">
+    </div>
+    <div class="form-item">
+        <label>Pay In Sunday Day Rate £*</label>
+        <input type="text" name="payInSundayDayRate" value="<%= workplace.payInSundayDayRate %>">
+    </div>
+    <div class="form-item">
+        <label>Pay In Sunday Night Rate £*</label>
+        <input type="text" name="payInSundayNightRate" value="<%= workplace.payInSundayNightRate %>">
+    </div>
+    <div class="form-item">
+        <label>Pay Out Week Day Rate £*</label>
+        <input type="text" name="payOutWeekDayRate" value="<%= workplace.payOutWeekDayRate %>">
+    </div>
+    <div class="form-item">
+        <label>Pay Out Week Night Rate £*</label>
+        <input type="text" name="payOutWeekNightRate" value="<%= workplace.payOutWeekNightRate %>">
+    </div>
+    <div class="form-item">
+        <label>Pay Out Saturday Day Rate £*</label>
+        <input type="text" name="payOutSaturdayDayRate" value="<%= workplace.payOutSaturdayDayRate %>">
+    </div>
+    <div class="form-item">
+        <label>Pay Out Saturday Night Rate £*</label>
+        <input type="text" name="payOutSaturdayNightRate" value="<%= workplace.payOutSaturdayNightRate %>">
+    </div>
+    <div class="form-item">
+        <label>Pay Out Sunday Day Rate £*</label>
+        <input type="text" name="payOutSundayDayRate" value="<%= workplace.payOutSundayDayRate %>">
+    </div>
+    <div class="form-item">
+        <label>Pay Out Sunday Night Rate £*</label>
+        <input type="text" name="payOutSundayNightRate" value="<%= workplace.payOutSundayNightRate %>">
+    </div>
+    <div class="form-item">
+        <label>Notes</label>
+        <textarea name="description"><%= workplace.description %></textarea>
+    </div>
 </div>
-<div>
-    <label>Address</label>
-    <input type="text" name="address" value="<%= workplace.address %>">
-</div>
-<div>
-    <label>Phone</label>
-    <input type="tel" name="phone" value="<%= workplace.phone %>">
-</div>
-<div>
-    <label>E-mail</label>
-    <input type="email" name="email" value="<%= workplace.email %>">
-</div>
-<div>
-    <label>Break Deduction (in minutes)*</label>
-    <input type="number" max="60" name="breakDeduction" value="<%= workplace.breakDeduction %>">
-</div>
-<div>
-    <label>Minimum Shift Pay (in hours)*</label>
-    <input type="number" name="minShift" max="10" value="<%= workplace.minShift %>">
-</div>
-
-<div>
-    <label>Pay In Week Day Rate £*</label>
-    <input type="text" name="payInWeekDayRate" value="<%= workplace.payInWeekDayRate %>">
-</div>
-<div>
-    <label>Pay In Week Night Rate £*</label>
-    <input type="text" name="payInWeekNightRate" value="<%= workplace.payInWeekNightRate %>">
-</div>
-<div>
-    <label>Pay In Saturday Day Rate £*</label>
-    <input type="text" name="payInSaturdayDayRate" value="<%= workplace.payInSaturdayDayRate %>">
-</div>
-<div>
-    <label>Pay In Saturday Night Rate £*</label>
-    <input type="text" name="payInSaturdayNightRate" value="<%= workplace.payInSaturdayNightRate %>">
-</div>
-<div>
-    <label>Pay In Sunday Day Rate £*</label>
-    <input type="text" name="payInSundayDayRate" value="<%= workplace.payInSundayDayRate %>">
-</div>
-<div>
-    <label>Pay In Sunday Night Rate £*</label>
-    <input type="text" name="payInSundayNightRate" value="<%= workplace.payInSundayNightRate %>">
-</div>
-
-<div>
-    <label>Pay Out Week Day Rate £*</label>
-    <input type="text" name="payOutWeekDayRate" value="<%= workplace.payOutWeekDayRate %>">
-</div>
-<div>
-    <label>Pay Out Week Night Rate £*</label>
-    <input type="text" name="payOutWeekNightRate" value="<%= workplace.payOutWeekNightRate %>">
-</div>
-<div>
-    <label>Pay Out Saturday Day Rate £*</label>
-    <input type="text" name="payOutSaturdayDayRate" value="<%= workplace.payOutSaturdayDayRate %>">
-</div>
-<div>
-    <label>Pay Out Saturday Night Rate £*</label>
-    <input type="text" name="payOutSaturdayNightRate" value="<%= workplace.payOutSaturdayNightRate %>">
-</div>
-<div>
-    <label>Pay Out Sunday Day Rate £*</label>
-    <input type="text" name="payOutSundayDayRate" value="<%= workplace.payOutSundayDayRate %>">
-</div>
-<div>
-    <label>Pay Out Sunday Night Rate £*</label>
-    <input type="text" name="payOutSundayNightRate" value="<%= workplace.payOutSundayNightRate %>">
-</div>
-<div>
-    <label>Notes</label>
-    <textarea name="description"><%= workplace.description %></textarea>
-</div>
+    

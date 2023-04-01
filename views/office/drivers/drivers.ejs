@@ -1,16 +1,28 @@
-<h2>Search Drivers</h2>
-<form method="GET" action="/office/drivers">
-    <label>Name</label>
-    <input type="text" name="name" value="<%= searchOptions.name %>">
-    <button type="submit">Search</button>
-</form>
-<br>
-
-<% if (drivers != null && drivers.length > 0) { %>
-    <% drivers.forEach(driver => { %>
-        <div><%= driver.name %></div>
-        <a href="/office/drivers/<%= driver.id %>">View</a>
-        <a href="/office/drivers/<%= driver.id %>/edit">Edit</a>
-        <%- include("../../partials/deleteForm", { url: `/office/drivers/${driver.id}` }) %>
-    <% }) %>
-<% } %>
+<div class="show-wrapper">
+    <div class="page-header-container">
+        <h2>Search Drivers</h2>
+    </div>
+    <form method="GET" action="/office/drivers">
+        <div class="form-row">
+            <div class="form-item">
+                <label>Name</label>
+                <input type="text" name="name" value="<%= searchOptions.name %>">
+            </div>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+    <br>
+    
+    <% if (drivers != null && drivers.length > 0) { %>
+        <% drivers.forEach(driver => { %>
+            <div class="show-row">
+                <div class="show-item-name"><%= driver.name %></div>
+                <div class="show-item-buttons">
+                    <a class="btn btn-primary" href="/office/drivers/<%= driver.id %>">View</a>
+                    <a class="btn btn-primary" href="/office/drivers/<%= driver.id %>/edit">Edit</a>
+                    <%- include("../../partials/deleteForm", { url: `/office/drivers/${driver.id}` }) %>
+                </div>
+            </div>
+            <% }) %>
+            <% } %>            
+</div>

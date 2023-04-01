@@ -1,7 +1,27 @@
 @import "shared/fonts.css";
+@import "shared/variables.css";
+@import "shared/header.css";
+@import "shared/officeDash.css";
+@import "shared/form.css";
+@import "shared/show.css";
+@import "shared/view.css";
+@import "shared/buttons.css";
+@import "shared/login.css";
+@import "shared/logout.css";
+@import "shared/driverDash.css";
+@import "shared/addShift.css";
 
 :root {
+    background-color: var(--background-color);
     font-family: "Varela Round";
-    color: hsl(200, 60%, 40%);
+    color: var(--text-color);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
 }
 

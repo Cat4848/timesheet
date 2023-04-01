@@ -1,12 +1,11 @@
 <header>
     <nav>
-        <ul>
-            <li><a href="/">Mainstream Timesheet</a></li>
+        <div class="logout-container">
+            <!-- <li><a href="/">Mainstream Timesheet</a></li> -->
             <% if (loggedInAs) { %>
-                <li>Logged in as <%- loggedInAs %></li>
+                <li><%- loggedInAs %></li>
             <% } %>
             <%- include("./logout") %>
-        </ul>
+        </div>
     </nav>
 </header>
-

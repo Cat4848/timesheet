@@ -1,0 +1,21 @@
+.show-row {
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: 1rem;
+}
+
+.show-item-name {
+}
+
+.show-item-buttons {
+    display: flex;
+}
+
+.show-item-buttons button, a {
+    margin-left: 10px
+}
+
+.show-wrapper {
+    margin: 1rem;
+}
+

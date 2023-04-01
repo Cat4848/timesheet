@@ -1,16 +1,29 @@
-<h2>Search Workplaces</h2>
-<form method="GET" action="/office/workplaces">
-    <label>Name</label>
-    <input type="text" name="name" value="<%= searchOptions.name %>">
-    <button type="submit">Search</button>
-</form>
-<br>
+<div class="show-wrapper">
+    <div class="page-header-container">
+        <h2>Search Workplaces</h2>
+    </div>
+    <form method="GET" action="/office/workplaces">
+        <div class="form-row">
+            <div class="form-item">
+                <label>Name</label>
+                <input type="text" name="name" value="<%= searchOptions.name %>">
+            </div>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+    <br>
+    
+    <% if (workplaces != null && workplaces.length > 0) { %>
+        <% workplaces.forEach(workplace => { %>
+            <div class="show-row">
 
-<% if (workplaces != null && workplaces.length > 0) { %>
-    <% workplaces.forEach(workplace => { %>
-        <div><%= workplace.name %></div>
-        <a href="/office/workplaces/<%= workplace.id %>">View</a>
-        <a href="/office/workplaces/<%= workplace.id %>/edit">Edit</a>
-        <%- include("../../partials/deleteForm", { url: `/office/workplaces/${workplace.id}` }) %>
-    <% }) %>
-<% } %>
+                <div class="show-item-name"><%= workplace.name %></div>
+                <div class="show-item-buttons">
+                    <a class="btn btn-primary" href="/office/workplaces/<%= workplace.id %>">View</a>
+                    <a class="btn btn-primary" href="/office/workplaces/<%= workplace.id %>/edit">Edit</a>
+                    <%- include("../../partials/deleteForm", { url: `/office/workplaces/${workplace.id}` }) %>
+                </div>
+            </div>
+                <% }) %>
+                <% } %>
+</div>

@@ -1,0 +1,6 @@
+:root {
+    --background-color: hsl(0, 0%, 100%);
+    --text-color: hsl(0, 0%, 0%);
+    --color-nav-bar-border-bottom:hsl(0, 0%, 50%);
+    --nav-title-font-size: 1rem;    
+}

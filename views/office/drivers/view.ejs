@@ -1,39 +1,43 @@
-<h2><%= driver.name %></h2>
-
-<div>Address</div>
-<div><%= driver.address %></div>
-
-<div>Mobile</div>
-<div><%= driver.phone %></div>
-
-<div>E-mail</div>
-<div><%= driver.email %></div>
-
-<div>Driver License</div>
-<div><%= driver.licenseNo %></div>
-
-<div>Description</div>
-<div><%= driver.description %></div>
-
-<input type="hidden" id="driver-id" value="<%= driverId %>">
-
-<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-    <i class="fa fa-calendar"></i>&nbsp;
-    <span></span> <i class="fa fa-caret-down"></i>
-</div>
-
-<div id="error-message"></div>
-
-<div id="average-hourly-rate"></div>
-
-<div style="border: 2px solid red">
-    <canvas id="total-hours-bar-chart" style="width: 600px; height: 200px; border: 2px solid green"></canvas>
-</div>
-
-<div style="border: 2px solid red">
-    <canvas id="total-earnings-bar-chart" style="width: 600px; height: 200px; border: 2px solid green"></canvas>
-</div>
-
-<div style="border: 2px solid red">
-    <canvas id="pie-chart" style="width: 600px; height: 200px; border: 2px solid green"></canvas>
+<div class="show-wrapper">
+    <div class="page-header-container">
+        <h2><%= driver.name %></h2>
+    </div>
+    
+    <div class="view-row">
+        <div class="view-title">Address</div>
+        <div><%= driver.address %></div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Mobile</div>
+        <div><%= driver.phone %></div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">E-mail</div>
+        <div><%= driver.email %></div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Driver License</div>
+        <div><%= driver.licenseNo %></div>
+    </div>
+    <div class="view-row">
+        <div class="view-title">Description</div>
+        <div><%= driver.description %></div>
+    </div>
+    
+    <input type="hidden" id="driver-id" value="<%= driverId %>">
+    
+    <div id="reportrange" class="view-row" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+        <i class="fa fa-calendar"></i>&nbsp;
+        <span></span> <i class="fa fa-caret-down"></i>
+    </div>
+    
+    <div id="error-message"></div>
+    
+    <div id="average-hourly-rate" class="view-row"></div>
+    
+    <canvas id="total-hours-bar-chart"></canvas>
+    
+    <canvas id="total-earnings-bar-chart"></canvas>
+    
+    <canvas id="pie-chart"></canvas>
 </div>

@@ -1,0 +1,45 @@
+.add-shift-wrapper {
+    margin: 1rem;
+    text-align: center;
+    padding: 0 10rem;
+}
+.add-shift-form-row {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--form-margin-left);
+}
+
+.add-shift-form-item {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.add-shift-form-item input {
+   outline-color: var(--color-nav-bar-border-bottom);
+   outline-color: black;
+   border: 1px solid var(--color-nav-bar-border-bottom);
+   padding: 10px;
+   border-radius: 5px;
+   margin: 5px 0;
+}
+
+.add-shift-form-item select {
+    outline-color: var(--color-nav-bar-border-bottom);
+    outline-color: black;
+    border: 1px solid var(--color-nav-bar-border-bottom);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.add-shift-buttons-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.add-shift-buttons-wrapper button {
+    margin-left: 2rem;
+}

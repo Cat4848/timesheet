@@ -1,54 +1,65 @@
-<h2>Add Shift</h2>
-<form action="/drivers/shifts" method="POST">
-    <div>
-        <label>Workplace*</label>
-        <select name="workplace" id="workplace">
-            <option label="Please select"></option>
-            <% workplaces.forEach(workplace => { %>
-                <% if (workplace.id == shift.workplace) { %>
-                    <option selected label="<%= workplace.name %>" value="<%= workplace.id %>"></option>
-                <% } else { %>
-                    <option label="<%= workplace.name %>" value="<%= workplace.id %>"></option>
-                <% } %>
-        <% }) %>
-        </select>
+<div class="add-shift-wrapper">
+    <div class="page-header-container">
+        <h2>Add Shift</h2>
     </div>
-    <div>
-        <label>Start*</label>
-        <input type="datetime-local" name="start" id="startShift" 
-            <% if (locals.shiftStart != undefined) { %>
-                value="<%= shiftStart %>">
-            <% } %>
-            
+    <form action="/drivers/shifts" method="POST">
+        <div class="add-shift-form-row">
+            <div class="add-shift-form-item">
+                <label>Workplace*</label>
+                <select name="workplace" id="workplace">
+                    <option label="Please select"></option>
+                    <% workplaces.forEach(workplace => { %>
+                        <% if (workplace.id == shift.workplace) { %>
+                            <option selected label="<%= workplace.name %>" value="<%= workplace.id %>"></option>
+                        <% } else { %>
+                            <option label="<%= workplace.name %>" value="<%= workplace.id %>"></option>
+                        <% } %>
+                <% }) %>
+                </select>
+            </div>
+            <div class="add-shift-form-item">
+                <label>Start*</label>
+                <input type="datetime-local" name="start" id="startShift" 
+                    <% if (locals.shiftStart != undefined) { %>
+                        value="<%= shiftStart %>">
+                    </div>
+                        <% } %>
+                    
+
+            <div class="add-shift-form-item">
+                <label>Finish*</label>
+                <input type="datetime-local" name="finish" id="finishShift" 
+                    <% if (locals.shiftFinish != undefined) { %>
+                        value="<%= shiftFinish %>">
+                    </div>
+                    <% } %>
+
+            <div class="add-shift-form-item">
+                <label>Break Deduction*</label>
+                <input type="number" name="breakDeduction" id="workplaceBreakDeduction" readonly>
+            </div>
+            <div class="add-shift-form-item">
+                <label>Minimum Shift*</label>
+                <input type="number" name="minShift" id="workplaceMinShift" readonly>
+            </div>
+            <div class="add-shift-form-item">
+                <label>Total Working Hours*</label>
+                <input type="text" name="totalWorkingHours" id="totalWorkingHours" readonly>
+            </div>
+            <input type="hidden" name="driver" value="<%= driver.id %>">
+            <input type="hidden" name="hiddenTotalWorkingHours" id="hiddenTotalWorkingHours">
+            <input type="hidden" name="hiddenTotalWorkingMinutes" id="hiddenTotalWorkingMinutes">
+            <input type="hidden" name="driverHiddenValue" id="driverHiddenValue">
+            <input type="hidden" name="officeHiddenValue" id="officeHiddenValue">
+            <div class="add-shift-form-item">
+                <label>Notes</label>
+                <textarea name="description"><%= shift.description === "" ? "" : shift.description %></textarea>
+            </div>
+            <div class="add-shift-buttons-wrapper">
+                <a class="btn btn-cancel" href="/drivers">Cancel</a>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
     </div>
-    <div>
-        <label>Finish*</label>
-        <input type="datetime-local" name="finish" id="finishShift" 
-            <% if (locals.shiftFinish != undefined) { %>
-                value="<%= shiftFinish %>">
-            <% } %>
-    </div>
-    <div>
-        <label>Break Deduction*</label>
-        <input type="number" name="breakDeduction" id="workplaceBreakDeduction" readonly>
-    </div>
-    <div>
-        <label>Minimum Shift*</label>
-        <input type="number" name="minShift" id="workplaceMinShift" readonly>
-    </div>
-    <div>
-        <label>Total Working Hours*</label>
-        <input type="text" name="totalWorkingHours" id="totalWorkingHours" readonly>
-    </div>
-    <input type="hidden" name="driver" value="<%= driver.id %>">
-    <input type="hidden" name="hiddenTotalWorkingHours" id="hiddenTotalWorkingHours">
-    <input type="hidden" name="hiddenTotalWorkingMinutes" id="hiddenTotalWorkingMinutes">
-    <input type="hidden" name="driverHiddenValue" id="driverHiddenValue">
-    <input type="hidden" name="officeHiddenValue" id="officeHiddenValue">
-    <div>
-        <label>Notes</label>
-        <textarea name="description"><%= shift.description === "" ? "" : shift.description %></textarea>
-    </div>
-    <a href="/drivers">Cancel</a>
-    <button type="submit">Submit</button>
-</form>
+</div>
+

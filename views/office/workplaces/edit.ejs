@@ -1,6 +1,8 @@
-<h2>Edit Workplace</h2>
+<div class="page-header-container">
+    <h2>Edit Workplace</h2>
+</div>
 <form action="/office/workplaces/<%= workplace.id %>?_method=PUT" method="POST">
     <%- include("./_form_fields") %>
-    <a href="/office/workplaces">Cancel</a>
-    <button type="submit">Update</button>
+    <a class="btn btn-cancel" href="/office/workplaces">Cancel</a>
+    <button class="btn btn-primary" type="submit">Update</button>
 </form>

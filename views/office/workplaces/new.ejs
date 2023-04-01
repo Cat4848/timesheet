@@ -1,8 +1,10 @@
-<h2>Create New Workplace</h2>
+<div class="page-header-container">
+    <h2>Create New Workplace</h2>
+</div>
 <%- include("../../partials/errorMessage") %>
 <form action="/office/workplaces" method="POST">
     <%- include("./_form_fields") %>
 
-    <a href="/office/workplaces">Cancel</a>
-    <button type="submit">Create</button>
+    <a class="btn btn-cancel" href="/office/workplaces">Cancel</a>
+    <button class="btn btn-primary" type="submit">Create</button>
 </form>
