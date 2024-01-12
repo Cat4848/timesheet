@@ -37,7 +37,7 @@ if (app.get("env") === "production") {
         mongoUrl: process.env.DATABASE_URL
       }),
       resave: true,
-      saveUninitialized: false
+      saveUninitialized: true
     })
   );
 }
