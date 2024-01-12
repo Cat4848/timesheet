@@ -1,30 +1,39 @@
 .login-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: 1rem;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 1rem;
 }
 
 .login-row {
-    display: block;
-    margin: 5rem;
-
+  display: block;
+  margin: 5rem;
 }
 
 .login-item {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .login-item input {
-    outline-color: var(--color-nav-bar-border-bottom);
-    outline-color: black;
-    border: 1px solid var(--color-nav-bar-border-bottom);
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px 0;
- }
+  outline-color: var(--color-nav-bar-border-bottom);
+  outline-color: black;
+  border: 1px solid var(--color-nav-bar-border-bottom);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+
+.login-continue-as-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.login-continue-as-button {
+  width: 40vmin;
+}
