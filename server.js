@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== "production") {
-    require("dotenv").config();
+  require("dotenv").config();
 }
 const express = require("express");
 const app = express();
@@ -17,25 +17,29 @@ const cors = require("cors");
 const MongoStore = require("connect-mongo");
 
 if (app.get("env") === "production") {
-    app.set("trust proxy", 1);
-    app.use(session({
-        secret: process.env.SESSION_SECRET,
-        store: MongoStore.create({
-            mongoUrl: process.env.DATABASE_URL
-        }),
-        resave: false,
-        saveUninitialized: false,
-        cookie: {secure: true}
-    }));
+  app.set("trust proxy", 1);
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET,
+      store: MongoStore.create({
+        mongoUrl: process.env.DATABASE_URL
+      }),
+      resave: true,
+      saveUninitialized: true,
+      cookie: { secure: true }
+    })
+  );
 } else {
-    app.use(session({
-        secret: process.env.SESSION_SECRET,
-        store: MongoStore.create({
-            mongoUrl: process.env.DATABASE_URL
-        }),
-        resave: false,
-        saveUninitialized: false
-    }));
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET,
+      store: MongoStore.create({
+        mongoUrl: process.env.DATABASE_URL
+      }),
+      resave: true,
+      saveUninitialized: false
+    })
+  );
 }
 app.use(passport.initialize());
 app.use(passport.session());
@@ -49,16 +53,18 @@ app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(flash());
-app.use(cors({
+app.use(
+  cors({
     origin: true,
     credentials: true
-}));
+  })
+);
 
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DATABASE_URL);
 mongoose.set("strictQuery", false);
 const db = mongoose.connection;
-db.on("error", error => console.error(error, "db error"));
+db.on("error", (error) => console.error(error, "db error"));
 db.once("open", () => console.log("Connected to Mongoose"));
 
 //routes
