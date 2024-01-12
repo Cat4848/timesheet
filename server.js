@@ -15,7 +15,6 @@ const passport = require("passport");
 const session = require("express-session");
 const cors = require("cors");
 const MongoStore = require("connect-mongo");
-//
 
 if (app.get("env") === "production") {
   app.set("trust proxy", 1);
