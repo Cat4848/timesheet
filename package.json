@@ -2,9 +2,6 @@
   "name": "timesheet",
   "version": "1.0.0",
   "description": "",
-  "engines": {
-    "node": "v19.8.1"
-  },
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
