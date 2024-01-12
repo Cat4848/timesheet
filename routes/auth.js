@@ -104,11 +104,19 @@ router.get("/", checkNotAuthenticated, (req, res) => {
   res.render("index");
 });
 
-router.get("/login", checkNotAuthenticated, (req, res) => {
-  console.log("login get route");
-  res.render("authentication", {
+router.get("/driver-login", checkNotAuthenticated, (req, res) => {
+  console.log("driver login get route");
+  res.render("driverAuthentication", {
     driverEmail: process.env.DRIVER_EMAIL,
     driverPassword: process.env.DRIVER_PASSWORD
+  });
+});
+
+router.get("/office-login", checkNotAuthenticated, (req, res) => {
+  console.log("office login get route");
+  res.render("officeAuthentication", {
+    officeEmail: process.env.OFFICE_EMAIL,
+    officePassword: process.env.OFFICE_PASSWORD
   });
 });
 
@@ -194,7 +202,7 @@ router.delete("/logout", isAuthenticated, (req, res, next) => {
   console.log("logout route");
   req.logOut((error) => {
     if (error) return next(error);
-    res.redirect("/login");
+    res.redirect("/");
   });
 });
 
