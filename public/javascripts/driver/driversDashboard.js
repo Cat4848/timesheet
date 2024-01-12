@@ -1,6 +1,6 @@
 import { localhostBaseUrl, herokuBaseUrl } from "../../../lib/constants";
-
-if ((window, location.pathname === "/drivers")) {
+console.log("driver dashboard");
+if (window.location.pathname === "/drivers") {
   console.log("drivers dashboard -> window.location", window.location.pathname);
   window.onload = createDateRangePicker;
   function createDateRangePicker() {
