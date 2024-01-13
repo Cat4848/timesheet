@@ -85,6 +85,10 @@ if (window.location.pathname === "/drivers") {
       let totalTimeFloat = 0;
       let totalValue = 0;
       shifts.forEach((shift) => {
+        console.log(
+          "parseBarChartData -> driver shift value",
+          shift.driverValue
+        );
         const hours = shift.totalWorkingHours;
         const minutes = shift.totalWorkingMinutes;
         const hoursMinutes = toFloat(hours, minutes);
