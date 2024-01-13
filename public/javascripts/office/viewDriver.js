@@ -2,7 +2,6 @@ import { createDateRangePicker } from "../../modules/frontend/utils.js";
 import { localhostBaseUrl, herokuBaseUrl } from "../../../lib/constants.js";
 
 if (window.location.href.includes("/office/drivers")) {
-  console.log("viewDriver frontend file");
   window.onload = main;
   function main() {
     const driverId = document.querySelector("#driver-id").innerHTML;
@@ -12,7 +11,6 @@ if (window.location.href.includes("/office/drivers")) {
   async function getDriverData(url) {
     const request = await fetch(url);
     const response = await request.json();
-    console.log(response);
   }
 
   function getURL() {
@@ -25,7 +23,6 @@ if (window.location.href.includes("/office/drivers")) {
   }
 
   function getDateRangeInfo(range, url = getURL()) {
-    console.log("office view driver -> range", range);
     const searchParams = new URLSearchParams({
       start: range.start.toISOString(),
       end: range.end.toISOString()
@@ -34,7 +31,6 @@ if (window.location.href.includes("/office/drivers")) {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        console.log("get range info data", data);
         totalHoursWorkedBarChartCreation(data.totalTime);
         totalEarningsBarChartCreation(data.totalValue);
         displayAverageHourlyRate(
@@ -46,7 +42,6 @@ if (window.location.href.includes("/office/drivers")) {
         displayError(data.errorMessage);
       })
       .catch((error) => {
-        console.error("error", error);
       });
   }
   const defaultRange = createDateRangePicker();
@@ -64,8 +59,6 @@ if (window.location.href.includes("/office/drivers")) {
 
   function totalHoursWorkedBarChartCreation(totalTimeFloat) {
     if (totalTimeFloat) {
-      console.log("total hours worked bar creation function begin");
-      console.log(totalTimeFloat);
       const ctx = document.querySelector("#total-hours-bar-chart");
       const data = {
         labels: [""],
@@ -175,7 +168,6 @@ if (window.location.href.includes("/office/drivers")) {
 
   function parsePieChartData(shifts = []) {
     if (shifts.length) {
-      console.log("shifts", shifts);
       const workplaces = new Map();
       shifts.forEach((shift) => {
         const hours = shift.totalWorkingHours;

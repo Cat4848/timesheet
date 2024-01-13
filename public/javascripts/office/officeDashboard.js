@@ -3,10 +3,8 @@ import { createCompareDateRange1Picker } from "../../modules/frontend/utils.js";
 import { createCompareDateRange2Picker } from "../../modules/frontend/utils.js";
 import { localhostBaseUrl, herokuBaseUrl } from "../../../lib/constants.js";
 
-console.log("office Dashboard -> pathname", window.location.pathname);
 if (window.location.pathname === "/office") {
   let doughnutData = [];
-  console.log("office dashboard");
   function getURL(path) {
     if (path !== "") {
       if (window.location.hostname === "localhost") {
@@ -72,7 +70,6 @@ if (window.location.pathname === "/office") {
     if (data.id === "top3workplaces") {
       displayTop3Workplaces(data);
     }
-    // console.log("data triage", data);
   }
 
   function displayTotals(data) {
@@ -218,7 +215,6 @@ if (window.location.pathname === "/office") {
   getRange2(getURL("financial"));
 
   $("#reportrange2").on("apply.daterangepicker", (ev, picker) => {
-    console.log("range 1 event handler");
     const start = picker.startDate;
     const end = picker.endDate;
     const customRange = {
