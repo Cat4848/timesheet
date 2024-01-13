@@ -1,4 +1,4 @@
-import { localhostBaseUrl, herokuBaseUrl } from "../../../lib/constants";
+import { localhostBaseUrl, herokuBaseUrl } from "../../lib/constants.js";
 console.log("driver dashboard");
 if (window.location.pathname === "/drivers") {
   console.log("drivers dashboard -> window.location", window.location.pathname);
@@ -299,8 +299,8 @@ if (window.location.pathname === "/drivers") {
               ? "No Data"
               : `Total ${workingTimeSumForSelectedPeriodInHoursAndMinutes}`;
 
-          (textX = Math.round((width - ctx.measureText(text).width) / 2)),
-            (textY = height / 1.9);
+          const textX = Math.round((width - ctx.measureText(text).width) / 2);
+          const textY = height / 1.9;
 
           ctx.fillText(text, textX, textY);
           ctx.save();
