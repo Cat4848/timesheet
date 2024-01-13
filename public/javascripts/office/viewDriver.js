@@ -5,7 +5,7 @@ if (window.location.href.includes("/office/drivers")) {
   window.onload = main;
   function main() {
     const driverId = document.querySelector("#driver-id").innerHTML;
-    const url = new URL(`http://localhost:3000/office/driverData/${driverId}`);
+    const url = new URL(`${localhostBaseUrl}/office/driverData/${driverId}`);
     getDriverData(url);
   }
   async function getDriverData(url) {
@@ -41,8 +41,7 @@ if (window.location.href.includes("/office/drivers")) {
         parsePieChartData(data.shifts);
         displayError(data.errorMessage);
       })
-      .catch((error) => {
-      });
+      .catch((error) => {});
   }
   const defaultRange = createDateRangePicker();
   getDateRangeInfo(defaultRange);
