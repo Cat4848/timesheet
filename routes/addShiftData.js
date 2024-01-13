@@ -8,8 +8,6 @@ router.use(isAuthenticated);
 router.use(isAuthorized);
 
 router.get("/:id", async (req, res) => {
-    console.log("add shift route");
-    console.log("req id", req.params.id);
     try {
         const workplace = await Workplace.findById(req.params.id);
         res.json({
@@ -29,7 +27,6 @@ router.get("/:id", async (req, res) => {
             officeSundayNightRate: workplace.payInSundayNightRate, 
         });
     } catch (error) {
-        console.error(`Error on database request or res.json(). Error is: ${error}`)        
     }
 });
 

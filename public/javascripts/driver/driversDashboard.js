@@ -1,7 +1,5 @@
 import { localhostBaseUrl, herokuBaseUrl } from "../../lib/constants.js";
-console.log("driver dashboard");
 if (window.location.pathname === "/drivers") {
-  console.log("drivers dashboard -> window.location", window.location.pathname);
   window.onload = createDateRangePicker;
   function createDateRangePicker() {
     moment.updateLocale("en", {
@@ -63,13 +61,10 @@ if (window.location.pathname === "/drivers") {
     fetch(updateDashboardUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log("driver dashboard -> shifts", data);
         parseBarChartData(data.shifts);
         parsePieChartData(data.shifts);
       })
-      .catch((error) => {
-        console.error("error", error);
-      });
+      .catch((error) => {});
   }
 
   function getURL() {
@@ -85,10 +80,6 @@ if (window.location.pathname === "/drivers") {
       let totalTimeFloat = 0;
       let totalValue = 0;
       shifts.forEach((shift) => {
-        console.log(
-          "parseBarChartData -> driver shift value",
-          shift.driverValue
-        );
         const hours = shift.totalWorkingHours;
         const minutes = shift.totalWorkingMinutes;
         const hoursMinutes = toFloat(hours, minutes);
@@ -98,8 +89,6 @@ if (window.location.pathname === "/drivers") {
       totalTimeFloat = parseFloat(totalTimeFloat.toFixed(2));
       totalValue = parseFloat(totalValue.toFixed(2));
 
-      console.log("parseBarChartData -> totalValue", totalValue);
-      console.log("parseBarChartData -> totalTimeFloat", totalTimeFloat);
       totalHoursWorkedBarChartCreation(totalTimeFloat);
       totalEarningsBarChartCreation(totalValue);
       displayAverageHourlyRate(totalTimeFloat, totalValue);
@@ -201,15 +190,10 @@ if (window.location.pathname === "/drivers") {
   }
 
   function displayAverageHourlyRate(totalTimeFloat, totalValue) {
-    console.log("displayAverageHourlyRate -> totalTime", totalTimeFloat);
-    console.log("displayAverageHourlyRate -> totalValue", totalValue);
     const averageHourlyRate = parseFloat(
       (totalValue / totalTimeFloat).toFixed(2)
     );
-    console.log(
-      "displayAverageHourlyRate -> averageHourlyRate",
-      averageHourlyRate
-    );
+
     const averageHourlyRateELement = document.querySelector(
       "#average-hourly-rate"
     );
