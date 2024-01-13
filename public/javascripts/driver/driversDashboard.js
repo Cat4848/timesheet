@@ -94,6 +94,8 @@ if (window.location.pathname === "/drivers") {
       totalTimeFloat = parseFloat(totalTimeFloat.toFixed(2));
       totalValue = parseFloat(totalValue.toFixed(2));
 
+      console.log("parseBarChartData -> totalValue", totalValue);
+      console.log("parseBarChartData -> totalTimeFloat", totalTimeFloat);
       totalHoursWorkedBarChartCreation(totalTimeFloat);
       totalEarningsBarChartCreation(totalValue);
       displayAverageHourlyRate(totalTimeFloat, totalValue);
@@ -195,8 +197,14 @@ if (window.location.pathname === "/drivers") {
   }
 
   function displayAverageHourlyRate(totalTimeFloat, totalValue) {
+    console.log("displayAverageHourlyRate -> totalTime", totalTimeFloat);
+    console.log("displayAverageHourlyRate -> totalValue", totalValue);
     const averageHourlyRate = parseFloat(
       (totalValue / totalTimeFloat).toFixed(2)
+    );
+    console.log(
+      "displayAverageHourlyRate -> averageHourlyRate",
+      averageHourlyRate
     );
     const averageHourlyRateELement = document.querySelector(
       "#average-hourly-rate"
